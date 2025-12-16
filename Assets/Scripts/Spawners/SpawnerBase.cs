@@ -10,15 +10,35 @@ public abstract class SpawnerBase<T> : MonoBehaviour where T : MonoBehaviour
     [SerializeField] protected int SpawnObjectCount;
     [SerializeField] protected float MinSpawnDelay = 1f;
     [SerializeField] protected float MaxSpawnDelay = 5f;
+    protected Coroutine _current—oroutine;
+    protected WaitForSeconds _waitForSeconds;
 
-    //[SerializeField] protected float LifeTime;
+    //protected virtual void Start()
+    //{
+    //    if (_current—oroutine != null)
+    //    {
+    //        StopCoroutine(_current—oroutine);
+    //    }
+
+    //    _current—oroutine = StartCoroutine(ObjectGenerator());
+    //}
 
     private void Awake()
     {
         PoolObject = new GenericObjectPool<T>(Prefab, PoolObjectCount);
     }
 
-    protected abstract IEnumerator EnemyGenerator();
+    protected virtual  IEnumerator ObjectGenerator( )
+    {
+        _waitForSeconds = new WaitForSeconds((Random.Range(MinSpawnDelay, MaxSpawnDelay)));
+
+        for (int i = 0; i < SpawnObjectCount; i++)
+        {
+            //Enemy enemy;
+            GreateNewPoolObject(out Prefab);
+            yield return _waitForSeconds;
+        }
+    }
     protected abstract void GreateNewPoolObject(out T prefab);
     protected abstract void OnReturnPoolObject(T prefab);
 }

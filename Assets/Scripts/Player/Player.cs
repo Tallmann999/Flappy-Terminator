@@ -1,9 +1,11 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(InputReader), typeof(Health))]
 [RequireComponent(typeof(PlayerMover), typeof(PlayerCollisionHandler))]
 public class Player : MonoBehaviour
 {
+    [SerializeField] private Weapon _currentWeapon;
     private PlayerCollisionHandler _playerCollisionHandler;
     private PlayerMover _playerMover;
     private InputReader _inputReader;
@@ -12,22 +14,35 @@ public class Player : MonoBehaviour
 
     private void OnEnable()
     {
-        _inputReader.Pressed += OnMovePressed;
+        _inputReader.PressedMove += OnMovePressed;
+        _inputReader.PressedAttack += OnAttackPressed;
         _playerCollisionHandler.CollisionDetection += OnStopGame;
         _health.Die += OnDie;
+    }
+
+    private void OnAttackPressed(bool attackStatus)
+    {
+        if (attackStatus)
+        {
+            Debug.Log("Пах пах я выстрелил");
+            _currentWeapon.Shoot(Vector2.right);
+        }
     }
 
     private void Awake()
     {
         _playerCollisionHandler = GetComponent<PlayerCollisionHandler>();
         _inputReader = GetComponent<InputReader>();
+        //_currentWeapon = GetComponentInChildren<Weapon>();
         _playerMover = GetComponent<PlayerMover>();
         _health = GetComponent<Health>();
     }
 
     private void OnDisable()
     {
-        _inputReader.Pressed -= OnMovePressed;
+        _inputReader.PressedMove -= OnMovePressed;
+        _inputReader.PressedAttack -= OnAttackPressed;
+
         _playerCollisionHandler.CollisionDetection -= OnStopGame;
         _health.Die -= OnDie;
     }
