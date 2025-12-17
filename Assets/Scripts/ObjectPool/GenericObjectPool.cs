@@ -17,20 +17,33 @@ public class GenericObjectPool<T>  where T : MonoBehaviour
         }
     }
 
+    //public T GetObject()
+    //{
+    //    T newObject;
+
+    //    if (_pools.Count == 0)
+    //    {
+    //        newObject = GameObject.Instantiate(_prefab, Vector3.zero, Quaternion.identity);
+    //        return newObject;
+    //    }
+    //    else
+    //    {
+    //       newObject =  _pools.Dequeue();
+    //    }
+
+    //    newObject.gameObject.SetActive(true);
+    //    return newObject;
+    //}
     public T GetObject()
     {
-        T newObject;
-
         if (_pools.Count == 0)
         {
-            newObject = GameObject.Instantiate(_prefab, Vector3.zero, Quaternion.identity);
-            return newObject;
-        }
-        else
-        {
-           newObject =  _pools.Dequeue();
+            T obj = GameObject.Instantiate(_prefab);
+            obj.gameObject.SetActive(false);
+            _pools.Enqueue(obj);
         }
 
+        T newObject = _pools.Dequeue();
         newObject.gameObject.SetActive(true);
         return newObject;
     }

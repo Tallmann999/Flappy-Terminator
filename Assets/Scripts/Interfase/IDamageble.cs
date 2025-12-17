@@ -1,4 +1,4 @@
-public interface IDamageble 
+public interface IDamageble
 {
-    void TakeDamage(int damage);
-}
+    void TakeDamage();
+}    

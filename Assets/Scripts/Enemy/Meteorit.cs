@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class Meteorit : MonoBehaviour, ISpawnable<Meteorit>
+public class Meteorit : MonoBehaviour, ISpawnable<Meteorit>, IInteractable
 {
     [SerializeField] private float _lifeTime = 5f;
 

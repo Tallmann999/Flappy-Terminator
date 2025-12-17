@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class MeteoritSpawner : SpawnerBase<Meteorit>
 {
+    private Coroutine _current—oroutine;
+    private WaitForSeconds _waitForSeconds;
+
     private void Start()
     {
         if (_current—oroutine != null)
@@ -13,6 +16,16 @@ public class MeteoritSpawner : SpawnerBase<Meteorit>
         _current—oroutine = StartCoroutine(ObjectGenerator());
     }
 
+    private  IEnumerator ObjectGenerator()
+    {
+        _waitForSeconds = new WaitForSeconds((Random.Range(MinSpawnDelay, MaxSpawnDelay)));
+
+        for (int i = 0; i < SpawnObjectCount; i++)
+        {
+            GreateNewPoolObject(out Prefab);
+            yield return _waitForSeconds;
+        }
+    }
 
     protected override void GreateNewPoolObject(out Meteorit meteorit)
     {

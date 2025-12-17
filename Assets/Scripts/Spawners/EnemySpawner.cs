@@ -5,11 +5,9 @@ public class EnemySpawner : SpawnerBase<Enemy>
 {
     [SerializeField] private float _minSpawnHeight;
     [SerializeField] private float _maxSpawnHeight;
-    //[SerializeField] private float _minSpawnDelay = 1f;
-    //[SerializeField] private float _maxSpawnDelay =2f;
 
-    //private Coroutine _current—oroutine;
-    //private WaitForSeconds _waitForSeconds;
+    private Coroutine _current—oroutine;
+    private WaitForSeconds _waitForSeconds;
 
     private  void Start()
     {
@@ -21,18 +19,16 @@ public class EnemySpawner : SpawnerBase<Enemy>
         _current—oroutine = StartCoroutine(ObjectGenerator());
     }
 
+    private  IEnumerator ObjectGenerator()
+    {
+        _waitForSeconds = new WaitForSeconds((Random.Range(MinSpawnDelay, MaxSpawnDelay)));
 
-    //protected override IEnumerator EnemyGenerator()
-    //{
-    //    _waitForSeconds = new WaitForSeconds((Random.Range(MinSpawnDelay, MaxSpawnDelay)));
-
-    //    for (int i = 0; i < SpawnObjectCount; i++)
-    //    {
-    //        Enemy enemy;
-    //        GreateNewPoolObject(out enemy);
-    //        yield return _waitForSeconds;
-    //    }
-    //}
+        for (int i = 0; i < SpawnObjectCount; i++)
+        {
+            GreateNewPoolObject(out Prefab);
+            yield return _waitForSeconds;
+        }
+    }
 
     private Vector2 GenerateRandomPosition()
     {
@@ -40,7 +36,6 @@ public class EnemySpawner : SpawnerBase<Enemy>
         float positionY = Random.Range(_minSpawnHeight, _maxSpawnHeight);
         return new Vector2(positionX, positionY);
     }
-
     protected override void GreateNewPoolObject(out Enemy prefab)
     {
         prefab = PoolObject.GetObject();

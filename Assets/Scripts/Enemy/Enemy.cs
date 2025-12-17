@@ -2,23 +2,17 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, ISpawnable<Enemy>
+public class Enemy : MonoBehaviour, ISpawnable<Enemy>, IInteractable,IDamageble
 {
-    [SerializeField] private float _lifeTime = 5f; 
+    [SerializeField] private float _lifeTime = 5f;
+    //[SerializeField] private Weapon _currentWeapon;
 
-    private Health _health;
-    //private EnemyMover _enemyMover;
     private WaitForSeconds _waitForSeconds;
     private Coroutine _coroutine;
-    private bool _isReturned;
+    //private bool _isReturned;
 
     public event Action<Enemy> Destroyer;
 
-    private void Awake()
-    {
-        _isReturned = false;
-        _health = GetComponent<Health>();
-    }
 
     private void Start()
     {
@@ -30,19 +24,29 @@ public class Enemy : MonoBehaviour, ISpawnable<Enemy>
         _coroutine = StartCoroutine(LifecycleRoutine());
     }
 
-    private IEnumerator LifecycleRoutine()// прописать логику жизни 
+    private IEnumerator LifecycleRoutine()
     {
         _waitForSeconds = new WaitForSeconds(_lifeTime);
+        //Shooting();
         yield return _waitForSeconds;
         ReturnToPool();
     }
 
+    //private void Shooting()
+    //{
+    //    while(true)
+    //    {
+    //        _currentWeapon.Shoot();
+    //    }
+    //}
     private void ReturnToPool()
     {
-        if (_isReturned)
-            return;
-
-        _isReturned = true;
         Destroyer?.Invoke(this);
+    }
+
+    public void TakeDamage()
+    {
+        Destroy(this);
+        ReturnToPool();
     }
 }
