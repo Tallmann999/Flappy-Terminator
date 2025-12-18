@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class BulletMover : MonoBehaviour, IMoveble
@@ -13,6 +14,11 @@ public class BulletMover : MonoBehaviour, IMoveble
     public void Move()
     {
         transform.Translate(_direction * Time.deltaTime * _speed);
+    }
+
+    internal void SetDirection(Vector2 direction)
+    {
+        throw new NotImplementedException();
     }
 
     //public void Reset()

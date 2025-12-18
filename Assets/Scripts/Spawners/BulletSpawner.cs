@@ -1,15 +1,19 @@
-using System;
-using System.Collections;
 using UnityEngine;
 
 public class BulletSpawner : SpawnerBase<Bullet>
 {
+    //[SerializeField] protected float MinSpawnDelay = 1f; Это для задердки между выстрелами регулировать
+    //[SerializeField] protected float MaxSpawnDelay = 5f;
+
+
+    [SerializeField] private BulletOwner _owner;
+
     protected override void GreateNewPoolObject(out Bullet bullet)
     {
         bullet = PoolObject.GetObject();
         bullet.Destroyer -= OnReturnPoolObject;
         bullet.Destroyer += OnReturnPoolObject;
-        bullet.transform.position = transform.position;
+        bullet.Init(_owner);
     }
 
     protected override void OnReturnPoolObject(Bullet bullet)
@@ -18,9 +22,13 @@ public class BulletSpawner : SpawnerBase<Bullet>
         PoolObject.ReturnPoolObject(bullet);
     }
 
-    public void SpawnBullet()
+    public Bullet SpawnBullet(Vector3 position)
     {
-        GreateNewPoolObject(out Prefab);
-    }       
+        Bullet bullet;
+        GreateNewPoolObject(out bullet);
+        bullet.transform.position = position;
+        return bullet;
+    }
 
+  
 }

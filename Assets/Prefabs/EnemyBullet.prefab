@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3244524826920576422}
   - component: {fileID: 1807973193034626999}
-  - component: {fileID: 254701598834774600}
   - component: {fileID: 196203427098611070}
   - component: {fileID: 2105056264451811069}
+  - component: {fileID: 2457546596875348415}
   m_Layer: 0
   m_Name: EnemyBullet
   m_TagString: Untagged
@@ -94,19 +94,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &254701598834774600
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2850330640944776124}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c80ccc65744254645a08f578033271e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Bullet
-  _lifeTime: 5
 --- !u!114 &196203427098611070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,8 +106,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5824470992c6c8841936134747ef639c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletMover
-  _speed: 5
-  _direction: {x: 15, y: 0}
+  _speed: 1
+  _direction: {x: -5, y: 0}
 --- !u!61 &2105056264451811069
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -167,3 +154,16 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.068786174, y: 0.09}
   m_EdgeRadius: 0
+--- !u!114 &2457546596875348415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2850330640944776124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c80ccc65744254645a08f578033271e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bullet
+  _lifeTime: 5

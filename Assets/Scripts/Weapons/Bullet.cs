@@ -5,13 +5,13 @@ using UnityEngine;
 public class Bullet : MonoBehaviour, ISpawnable<Bullet>, IInteractable
 {
     [SerializeField] private float _lifeTime = 5f;
-    //[SerializeField] private int _damage = 5;
 
     private WaitForSeconds _waitForSeconds;
     private Coroutine _coroutine;
 
     public event Action<Bullet> Destroyer;
 
+    public BulletOwner Owner { get; private set; }
 
     private void OnEnable()
     {
@@ -26,6 +26,12 @@ public class Bullet : MonoBehaviour, ISpawnable<Bullet>, IInteractable
         if (_coroutine != null)
             StopCoroutine(_coroutine);
     }
+   
+
+    public void Init(BulletOwner owner)
+    {
+        Owner = owner;
+    }
 
     private IEnumerator LifecycleRoutine()
     {
@@ -36,13 +42,20 @@ public class Bullet : MonoBehaviour, ISpawnable<Bullet>, IInteractable
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out IDamageble idamageble))
+
+        if (Owner == BulletOwner.Player && collision.TryGetComponent(out Enemy enemy))
         {
-            idamageble.TakeDamage();
+            enemy.TakeDamage();
+            ReturnToPool();
+        }
+
+        if (Owner == BulletOwner.Enemy && collision.TryGetComponent(out Player player))
+        {
+            player.TakeDamage();
             ReturnToPool();
         }
     }
-   
+
     private void ReturnToPool()
     {
         ////if (_isReturned)

@@ -8,24 +8,27 @@ public class Meteorit : MonoBehaviour, ISpawnable<Meteorit>, IInteractable
 
     private WaitForSeconds _waitForSeconds;
     private Coroutine _coroutine;
-    private bool _isReturned;
+    //private bool _isReturned;
 
     public event Action<Meteorit> Destroyer;
 
+    //private void Awake()
+    //{
+    //    _isReturned = false;
+    //}
 
-    private void Awake()
-    {
-        _isReturned = false;
-    }
-
-    private void Start()
+    private void OnEnable()
     {
         if (_coroutine != null)
-        {
-            StopCoroutine(LifecycleRoutine());
-        }
+            StopCoroutine(_coroutine);
 
         _coroutine = StartCoroutine(LifecycleRoutine());
+    }
+
+    private void OnDisable()
+    {
+        if (_coroutine != null)
+            StopCoroutine(_coroutine);
     }
 
     private IEnumerator LifecycleRoutine()
@@ -37,10 +40,10 @@ public class Meteorit : MonoBehaviour, ISpawnable<Meteorit>, IInteractable
 
     private void ReturnToPool()
     {
-        if (_isReturned)
-            return;
+        //if (_isReturned)
+        //    return;
 
-        _isReturned = true;
+        //_isReturned = true;
         Destroyer?.Invoke(this);
     }
 }
