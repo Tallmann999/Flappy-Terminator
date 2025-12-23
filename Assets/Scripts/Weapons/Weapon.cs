@@ -2,28 +2,27 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public abstract class Weapon : MonoBehaviour
 {
     // Сделать абстактный класс оружия  и назначить врагам одно, а игроку другое. 
 
-    [SerializeField] private BulletSpawner _spawner;
-    [SerializeField] private Transform _firePoint;
+    [SerializeField] protected BulletSpawner Spawner;
+    [SerializeField] protected Transform FirePoint;
 
-    private WaitForSeconds _waitForSeconds;
-    private Coroutine _coroutine;
+    protected WaitForSeconds WaitForSeconds;
+    protected Coroutine CurrentCoroutine;
 
+    protected abstract IEnumerator FireActivator();
     
-
-    private IEnumerator FireActivator()
-    {
-        yield return null;
-        _spawner.SpawnBullet(_firePoint.position);
-       
-    }
 
     public void Shoot()
     {
-        StartCoroutine(FireActivator());
+        if (CurrentCoroutine != null)
+        {
+            StopCoroutine(FireActivator());
+        }
+
+        CurrentCoroutine = StartCoroutine(FireActivator());
     }
 
     //[SerializeField] private BulletSpawner _currentSpawner;

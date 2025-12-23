@@ -1,0 +1,24 @@
+using System;
+using TMPro;
+using UnityEngine;
+
+public class ScoreView : MonoBehaviour
+{
+    [SerializeField] private ScoreCounter _scoreCounter;
+    [SerializeField] private TextMeshProUGUI  _scope;
+
+    private void OnEnable()
+    {
+        _scoreCounter.ScopeChanger += OnScopeChanger;
+    }
+
+    private void OnDisable()
+    {
+        _scoreCounter.ScopeChanger -= OnScopeChanger;        
+    }
+
+    private void OnScopeChanger(int scope)
+    {
+        _scope.text= scope.ToString();
+    }
+}

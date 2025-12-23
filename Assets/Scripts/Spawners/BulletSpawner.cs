@@ -7,7 +7,8 @@ public class BulletSpawner : SpawnerBase<Bullet>
 
 
     [SerializeField] private BulletOwner _owner;
-
+    public int CurrentSpawnCount => SpawnObjectCount;
+   
     protected override void GreateNewPoolObject(out Bullet bullet)
     {
         bullet = PoolObject.GetObject();
@@ -28,7 +29,5 @@ public class BulletSpawner : SpawnerBase<Bullet>
         GreateNewPoolObject(out bullet);
         bullet.transform.position = position;
         return bullet;
-    }
-
-  
+    }  
 }
