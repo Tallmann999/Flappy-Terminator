@@ -6,12 +6,15 @@ public class Enemy : MonoBehaviour, ISpawnable<Enemy>, IInteractable, IDamageble
 {
     [SerializeField] private float _lifeTime = 5f;
     [SerializeField] private Weapon _currentWeapon;
+    [SerializeField] private int _scoreForKill = 10;
 
     private WaitForSeconds _waitForSeconds;
     private Coroutine _coroutine;
 
+    public event Action<Enemy> Died;
     public event Action<Enemy> Destroyer;
 
+    public int ScoreForKill => _scoreForKill;
 
     private void Start()
     {
@@ -39,6 +42,7 @@ public class Enemy : MonoBehaviour, ISpawnable<Enemy>, IInteractable, IDamageble
     public void TakeDamage()
     {
         Destroy(this);
+        Died?.Invoke(this);
         ReturnToPool();
-    }
+    }    
 }

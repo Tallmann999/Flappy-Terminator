@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,8 @@ public abstract class SpawnerBase<T> : MonoBehaviour where T : MonoBehaviour
     [SerializeField] protected int SpawnObjectCount;
     [SerializeField] protected float MinSpawnDelay = 1f;
     [SerializeField] protected float MaxSpawnDelay = 5f;
+
+    public event Action<T> Hit;
 
     private void Awake()
     {

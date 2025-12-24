@@ -15,6 +15,7 @@ public class Bullet : MonoBehaviour, ISpawnable<Bullet>, IInteractable
 
     private void OnEnable()
     {
+
         if (_coroutine != null)
             StopCoroutine(_coroutine);
 
@@ -25,8 +26,7 @@ public class Bullet : MonoBehaviour, ISpawnable<Bullet>, IInteractable
     {
         if (_coroutine != null)
             StopCoroutine(_coroutine);
-    }
-   
+    }   
 
     public void Init(BulletOwner owner)
     {

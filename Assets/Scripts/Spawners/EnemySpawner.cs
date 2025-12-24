@@ -4,7 +4,8 @@ using UnityEngine;
 public class EnemySpawner : SpawnerBase<Enemy>
 {
     [SerializeField] private float _minSpawnHeight;
-    [SerializeField] private float _maxSpawnHeight;
+    [SerializeField] private float _maxSpawnHeight; 
+    [SerializeField] private ScoreCounter _scoreCounter;
 
     private Coroutine _currentСoroutine;
     private WaitForSeconds _waitForSeconds;
@@ -36,17 +37,27 @@ public class EnemySpawner : SpawnerBase<Enemy>
         float positionY = Random.Range(_minSpawnHeight, _maxSpawnHeight);
         return new Vector2(positionX, positionY);
     }
-    protected override void GreateNewPoolObject(out Enemy prefab)
+    protected override void GreateNewPoolObject(out Enemy enemy)
     {
-        prefab = PoolObject.GetObject();
-        prefab.Destroyer -= OnReturnPoolObject;
-        prefab.Destroyer += OnReturnPoolObject;
-        prefab.transform.position = GenerateRandomPosition();
+        enemy = PoolObject.GetObject();
+        enemy.Destroyer -= OnReturnPoolObject;
+        enemy.Destroyer += OnReturnPoolObject;
+
+        enemy.Died -= OnEnemyDied;
+        enemy.Died += OnEnemyDied;
+
+        enemy.transform.position = GenerateRandomPosition();
     }
 
-    protected override void OnReturnPoolObject(Enemy prefab)
+    private void OnEnemyDied(Enemy enemy)
     {
-        prefab.Destroyer += OnReturnPoolObject;
-        PoolObject.ReturnPoolObject(prefab);
+        _scoreCounter.Add(enemy.ScoreForKill);
+    }
+
+    protected override void OnReturnPoolObject(Enemy enemy)
+    {
+        enemy.Died -= OnEnemyDied;
+        enemy.Destroyer += OnReturnPoolObject; //// ????? почему не минус отписка
+        PoolObject.ReturnPoolObject(enemy);
     }
 }

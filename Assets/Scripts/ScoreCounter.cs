@@ -7,9 +7,9 @@ public class ScoreCounter : MonoBehaviour
 
     public Action<int> ScopeChanger;
 
-    public void Add()
+    public void Add(int value)
     {
-        _scope++;
+        _scope += value;
         ScopeChanger?.Invoke(_scope);
     }
 

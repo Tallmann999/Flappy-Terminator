@@ -50,6 +50,50 @@ MonoBehaviour:
   MinSpawnDelay: 1
   MaxSpawnDelay: 5
   _owner: 0
+--- !u!1 &2394129843264310325
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3334851970511520770}
+  - component: {fileID: 2652426227101937873}
+  m_Layer: 0
+  m_Name: ScopeChanger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3334851970511520770
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2394129843264310325}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9068029259862694074}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2652426227101937873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2394129843264310325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5819d0b26f788a5428604047bf58b35e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScoreCounter
 --- !u!1 &2974293063526039025
 GameObject:
   m_ObjectHideFlags: 0
@@ -114,6 +158,7 @@ Transform:
   m_Children:
   - {fileID: 5620263400460845536}
   - {fileID: 2615263050733966896}
+  - {fileID: 3334851970511520770}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3069184747899111838
@@ -187,5 +232,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 213321faa07f77a41b85cbde938b82ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerWeapon
-  _spawner: {fileID: 0}
-  _firePoint: {fileID: 0}
+  Spawner: {fileID: 0}
+  FirePoint: {fileID: 0}
