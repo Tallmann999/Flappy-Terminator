@@ -4,13 +4,13 @@ using UnityEngine;
 public class EnemySpawner : SpawnerBase<Enemy>
 {
     [SerializeField] private float _minSpawnHeight;
-    [SerializeField] private float _maxSpawnHeight; 
+    [SerializeField] private float _maxSpawnHeight;
     [SerializeField] private ScoreCounter _scoreCounter;
 
     private Coroutine _currentСoroutine;
     private WaitForSeconds _waitForSeconds;
 
-    private  void Start()
+    private void Start()
     {
         if (_currentСoroutine != null)
         {
@@ -20,7 +20,7 @@ public class EnemySpawner : SpawnerBase<Enemy>
         _currentСoroutine = StartCoroutine(ObjectGenerator());
     }
 
-    private  IEnumerator ObjectGenerator()
+    private IEnumerator ObjectGenerator()
     {
         _waitForSeconds = new WaitForSeconds((Random.Range(MinSpawnDelay, MaxSpawnDelay)));
 
@@ -33,7 +33,7 @@ public class EnemySpawner : SpawnerBase<Enemy>
 
     private Vector2 GenerateRandomPosition()
     {
-        float positionX = transform.position.x; 
+        float positionX = transform.position.x;
         float positionY = Random.Range(_minSpawnHeight, _maxSpawnHeight);
         return new Vector2(positionX, positionY);
     }
@@ -59,5 +59,10 @@ public class EnemySpawner : SpawnerBase<Enemy>
         enemy.Died -= OnEnemyDied;
         enemy.Destroyer += OnReturnPoolObject; //// ????? почему не минус отписка
         PoolObject.ReturnPoolObject(enemy);
+    }
+
+    protected override void Reset()
+    {
+      // Реализовать остановку спавна
     }
 }

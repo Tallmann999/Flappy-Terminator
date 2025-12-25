@@ -29,5 +29,9 @@ public class BulletSpawner : SpawnerBase<Bullet>
         GreateNewPoolObject(out bullet);
         bullet.transform.position = position;
         return bullet;
-    }  
+    }
+    protected override void Reset()
+    {
+        // Реализовать остановку спавна
+    }
 }

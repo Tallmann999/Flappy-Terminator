@@ -59,6 +59,12 @@ public class Player : MonoBehaviour, IDamageble
         }
     }
 
+    public void Reset()
+    {
+        _playerMover.Reset();
+        //_shooter.Reset();
+    }
+
     public void TakeDamage()
     {
         GameOver?.Invoke();

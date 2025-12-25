@@ -39,5 +39,9 @@ public class MeteoritSpawner : SpawnerBase<Meteorit>
     {
         meteorit.Destroyer += OnReturnPoolObject;
         PoolObject.ReturnPoolObject(meteorit);
-    }   
+    }
+    protected override void Reset()
+    {
+        // Реализовать остановку спавна
+    }
 }

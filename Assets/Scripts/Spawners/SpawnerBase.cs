@@ -21,4 +21,5 @@ public abstract class SpawnerBase<T> : MonoBehaviour where T : MonoBehaviour
 
     protected abstract void GreateNewPoolObject(out T prefab);
     protected abstract void OnReturnPoolObject(T prefab);
+    protected abstract void Reset();    
 }
