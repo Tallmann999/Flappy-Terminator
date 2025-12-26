@@ -55,7 +55,7 @@ public class Player : MonoBehaviour, IDamageble
             || interactable is Meteorit || interactable is Bullet)
         {
             GameOver?.Invoke();
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
         }
     }
 

@@ -6,22 +6,25 @@ public abstract class Window : MonoBehaviour
     [SerializeField] private CanvasGroup _canvasGroup;
     [SerializeField] private Button _actionButton;
 
-    public CanvasGroup WindowsGroup => _canvasGroup;
-    public Button ActionButton => _actionButton;
+    protected CanvasGroup WindowsGroup => _canvasGroup;
+    protected Button ActionButton => _actionButton;
 
     private void OnEnable()
     {
         _actionButton.onClick.AddListener(OnButtonClick);
     }
 
+
     private void OnDisable()
-    {       
-        _actionButton.onClick.AddListener(OnButtonClick);
+    {
+        _actionButton.onClick.RemoveListener(OnButtonClick);
     }
+
 
     protected abstract void OnButtonClick();
 
     public abstract void Open();
     public abstract void Close();
+
 
 }

@@ -63,6 +63,7 @@ public class EnemySpawner : SpawnerBase<Enemy>
 
     protected override void Reset()
     {
-      // Реализовать остановку спавна
+
+        _scoreCounter.Reset();
     }
 }
