@@ -4,31 +4,29 @@ using UnityEngine;
 
 public class Meteorit : MonoBehaviour, ISpawnable<Meteorit>, IInteractable
 {
-    [SerializeField] private float _lifeTime = 5f;
+    [SerializeField] private float _lifeTime = 2f;
 
     private WaitForSeconds _waitForSeconds;
-    private Coroutine _coroutine;
-    //private bool _isReturned;
+    private Coroutine _currentCoroutine;
 
     public event Action<Meteorit> Destroyer;
 
-    //private void Awake()
-    //{
-    //    _isReturned = false;
-    //}
-
     private void OnEnable()
     {
-        if (_coroutine != null)
-            StopCoroutine(_coroutine);
+        if (_currentCoroutine != null)
+        {
+            StopCoroutine(LifecycleRoutine());
+        }
 
-        _coroutine = StartCoroutine(LifecycleRoutine());
+        _currentCoroutine = StartCoroutine(LifecycleRoutine());
     }
 
     private void OnDisable()
     {
-        if (_coroutine != null)
-            StopCoroutine(_coroutine);
+        if (_currentCoroutine != null)
+        {
+            StopCoroutine(LifecycleRoutine());
+        }
     }
 
     private IEnumerator LifecycleRoutine()

@@ -7,8 +7,6 @@ public class EnemyBullet : Bullet, ISpawnable<Bullet>, IInteractable
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-   
-
         if (Owner == BulletOwner.Enemy && collision.TryGetComponent(out Player player))
         {
             player.TakeDamage();
@@ -18,10 +16,6 @@ public class EnemyBullet : Bullet, ISpawnable<Bullet>, IInteractable
 
     private void ReturnToPool()
     {
-        ////if (_isReturned)
-        ////    return;
-
-        //_isReturned = true;
         Destroyer?.Invoke(this);
     }
 }

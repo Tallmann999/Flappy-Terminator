@@ -15,9 +15,10 @@ public class Bullet : MonoBehaviour, ISpawnable<Bullet>, IInteractable
 
     private void OnEnable()
     {
-
         if (_coroutine != null)
-            StopCoroutine(_coroutine);
+        {
+            StopCoroutine(LifecycleRoutine());
+        }
 
         _coroutine = StartCoroutine(LifecycleRoutine());
     }
@@ -25,19 +26,9 @@ public class Bullet : MonoBehaviour, ISpawnable<Bullet>, IInteractable
     private void OnDisable()
     {
         if (_coroutine != null)
-            StopCoroutine(_coroutine);
-    }   
-
-    public void Init(BulletOwner owner)
-    {
-        Owner = owner;
-    }
-
-    private IEnumerator LifecycleRoutine()
-    {
-        _waitForSeconds = new WaitForSeconds(_lifeTime);
-        yield return _waitForSeconds;
-        ReturnToPool();
+        {
+            StopCoroutine(LifecycleRoutine());
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -56,12 +47,20 @@ public class Bullet : MonoBehaviour, ISpawnable<Bullet>, IInteractable
         }
     }
 
+    public void Init(BulletOwner owner)
+    {
+        Owner = owner;
+    }
+
+    private IEnumerator LifecycleRoutine()
+    {
+        _waitForSeconds = new WaitForSeconds(_lifeTime);
+        yield return _waitForSeconds;
+        ReturnToPool();
+    }
+
     private void ReturnToPool()
     {
-        ////if (_isReturned)
-        ////    return;
-
-        //_isReturned = true;
         Destroyer?.Invoke(this);
     }
 }

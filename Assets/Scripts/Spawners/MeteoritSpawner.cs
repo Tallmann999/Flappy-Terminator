@@ -3,20 +3,14 @@ using UnityEngine;
 
 public class MeteoritSpawner : SpawnerBase<Meteorit>
 {
-    private Coroutine _current—oroutine;
     private WaitForSeconds _waitForSeconds;
 
-    private void Start()
+    public void Reset()
     {
-        if (_current—oroutine != null)
-        {
-            StopCoroutine(_current—oroutine);
-        }
-
-        _current—oroutine = StartCoroutine(ObjectGenerator());
+        ResetState();
     }
 
-    private  IEnumerator ObjectGenerator()
+    protected override IEnumerator SpawnRoutine()
     {
         _waitForSeconds = new WaitForSeconds((Random.Range(MinSpawnDelay, MaxSpawnDelay)));
 
@@ -37,11 +31,12 @@ public class MeteoritSpawner : SpawnerBase<Meteorit>
 
     protected override void OnReturnPoolObject(Meteorit meteorit)
     {
-        meteorit.Destroyer += OnReturnPoolObject;
+        meteorit.Destroyer -= OnReturnPoolObject;
         PoolObject.ReturnPoolObject(meteorit);
     }
-    protected override void Reset()
+
+    protected override void ResetState()
     {
-        // –Â‡ÎËÁÓ‚‡Ú¸ ÓÒÚ‡ÌÓ‚ÍÛ ÒÔ‡‚Ì‡
+        base.ResetState();
     }
 }

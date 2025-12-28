@@ -4,7 +4,7 @@ using UnityEngine;
 public class ScoreView : MonoBehaviour
 {
     [SerializeField] private ScoreCounter _scoreCounter;
-    [SerializeField] private TextMeshProUGUI  _scope;
+    [SerializeField] private TextMeshProUGUI _scope;
 
     private int _startScopeCount = 0;
 
@@ -16,11 +16,11 @@ public class ScoreView : MonoBehaviour
 
     private void OnDisable()
     {
-        _scoreCounter.ScopeChanger -= OnScopeChanger;        
+        _scoreCounter.ScopeChanger -= OnScopeChanger;
     }
 
     private void OnScopeChanger(int scope)
     {
-        _scope.text= scope.ToString();
+        _scope.text = scope.ToString();
     }
 }

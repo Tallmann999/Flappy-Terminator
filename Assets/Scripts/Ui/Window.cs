@@ -14,17 +14,13 @@ public abstract class Window : MonoBehaviour
         _actionButton.onClick.AddListener(OnButtonClick);
     }
 
-
     private void OnDisable()
     {
         _actionButton.onClick.RemoveListener(OnButtonClick);
     }
 
-
     protected abstract void OnButtonClick();
 
     public abstract void Open();
     public abstract void Close();
-
-
 }

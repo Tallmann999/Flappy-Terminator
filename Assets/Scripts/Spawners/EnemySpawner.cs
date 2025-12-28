@@ -7,20 +7,15 @@ public class EnemySpawner : SpawnerBase<Enemy>
     [SerializeField] private float _maxSpawnHeight;
     [SerializeField] private ScoreCounter _scoreCounter;
 
-    private Coroutine _currentÑoroutine;
     private WaitForSeconds _waitForSeconds;
 
-    private void Start()
+    public void Reset()
     {
-        if (_currentÑoroutine != null)
-        {
-            StopCoroutine(_currentÑoroutine);
-        }
-
-        _currentÑoroutine = StartCoroutine(ObjectGenerator());
+        ResetState();
+        _scoreCounter.Reset();
     }
 
-    private IEnumerator ObjectGenerator()
+    protected override IEnumerator SpawnRoutine()
     {
         _waitForSeconds = new WaitForSeconds((Random.Range(MinSpawnDelay, MaxSpawnDelay)));
 
@@ -31,22 +26,26 @@ public class EnemySpawner : SpawnerBase<Enemy>
         }
     }
 
-    private Vector2 GenerateRandomPosition()
-    {
-        float positionX = transform.position.x;
-        float positionY = Random.Range(_minSpawnHeight, _maxSpawnHeight);
-        return new Vector2(positionX, positionY);
-    }
     protected override void GreateNewPoolObject(out Enemy enemy)
     {
         enemy = PoolObject.GetObject();
         enemy.Destroyer -= OnReturnPoolObject;
         enemy.Destroyer += OnReturnPoolObject;
-
         enemy.Died -= OnEnemyDied;
         enemy.Died += OnEnemyDied;
-
         enemy.transform.position = GenerateRandomPosition();
+    }
+
+    protected override void OnReturnPoolObject(Enemy enemy)
+    {
+        enemy.Died -= OnEnemyDied;
+        enemy.Destroyer -= OnReturnPoolObject;
+        PoolObject.ReturnPoolObject(enemy);
+    }
+
+    protected override void ResetState()
+    {
+        base.ResetState();
     }
 
     private void OnEnemyDied(Enemy enemy)
@@ -54,16 +53,10 @@ public class EnemySpawner : SpawnerBase<Enemy>
         _scoreCounter.Add(enemy.ScoreForKill);
     }
 
-    protected override void OnReturnPoolObject(Enemy enemy)
+    private Vector2 GenerateRandomPosition()
     {
-        enemy.Died -= OnEnemyDied;
-        enemy.Destroyer += OnReturnPoolObject; //// ????? ïî÷åìó íå ìèíóñ îòïèñêà
-        PoolObject.ReturnPoolObject(enemy);
-    }
-
-    protected override void Reset()
-    {
-
-        _scoreCounter.Reset();
+        float positionX = transform.position.x;
+        float positionY = Random.Range(_minSpawnHeight, _maxSpawnHeight);
+        return new Vector2(positionX, positionY);
     }
 }

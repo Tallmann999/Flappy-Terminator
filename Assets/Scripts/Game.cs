@@ -1,14 +1,11 @@
-using System;
 using UnityEngine;
 
 public class Game : MonoBehaviour
 {
-   
-
-
     [SerializeField] private Player _player;
     [SerializeField] private EnemySpawner _enemySpawner;
-
+    [SerializeField] private MeteoritSpawner _meteoritSpawner;
+    [SerializeField] private AudioSource _mainLevelMusic;
     [SerializeField] private StartScreenGame _startScreen;
     [SerializeField] private EndScreenGame _gameOverScreen;
 
@@ -19,11 +16,10 @@ public class Game : MonoBehaviour
         _gameOverScreen.RestartButtonClicked += OnRestartButtonClick;
     }
 
-    private void OnDisable()
+    private void Awake()
     {
-        _player.GameOver -= OnGameOver;
-        _startScreen.PlayButtonClicked -= OnPlayButtonClick;
-        _gameOverScreen.RestartButtonClicked -= OnRestartButtonClick;
+        _mainLevelMusic = GetComponent<AudioSource>();
+        _mainLevelMusic.Stop();
     }
 
     private void Start()
@@ -33,15 +29,25 @@ public class Game : MonoBehaviour
         _gameOverScreen.Close();
     }
 
+    private void OnDisable()
+    {
+        _player.GameOver -= OnGameOver;
+        _startScreen.PlayButtonClicked -= OnPlayButtonClick;
+        _gameOverScreen.RestartButtonClicked -= OnRestartButtonClick;
+    }
+
     private void OnGameOver()
     {
         Time.timeScale = 0;
+        _mainLevelMusic.Stop();
         _gameOverScreen.Open();
     }
 
     private void OnPlayButtonClick()
     {
         _startScreen.Close();
+        _meteoritSpawner.StartSpawn();
+        _enemySpawner.StartSpawn();
         StartGame();
     }
 
@@ -53,8 +59,14 @@ public class Game : MonoBehaviour
 
     private void StartGame()
     {
+        _mainLevelMusic.Play();
         Time.timeScale = 1;
+
         _player.Reset();
-        //_enemySpawner.Reset();
+        _enemySpawner.Reset();
+        _meteoritSpawner.Reset();
+
+        _enemySpawner.StartSpawn();
+        _meteoritSpawner.StartSpawn();
     }
 }

@@ -3,14 +3,17 @@ using UnityEngine;
 
 public class InputReader : MonoBehaviour
 {
+    private const KeyCode Move = KeyCode.Space;
+
     private bool _isMove;
     private bool _isAttack;
+
     public event Action<bool> PressedMove;
     public event Action<bool> PressedAttack;
 
     private void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(Move))
         {
             _isMove = true;
             PressedMove?.Invoke(_isMove);
@@ -19,7 +22,7 @@ public class InputReader : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             _isAttack = true;
-            PressedAttack?.Invoke(_isMove);
+            PressedAttack?.Invoke(_isAttack);
         }
     }
 }

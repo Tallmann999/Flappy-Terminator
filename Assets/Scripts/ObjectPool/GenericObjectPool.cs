@@ -1,56 +1,61 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GenericObjectPool<T>  where T : MonoBehaviour
+public class GenericObjectPool<T> where T : MonoBehaviour
 {
-   private  T _prefab;
-   private Queue<T> _pools= new Queue<T>(); 
+    private T _prefab;
+    private readonly Queue<T> _freeObjects = new();
+    private readonly HashSet<T> _usedObjects = new();
 
     public GenericObjectPool(T prefab, int initializeCount)
     {
         _prefab = prefab;
+
         for (int i = 0; i < initializeCount; i++)
         {
-            T newObject = GameObject.Instantiate(prefab, Vector3.zero,Quaternion.identity);
-            newObject.gameObject.SetActive(false);
-            _pools.Enqueue( newObject );
+            T obj = Object.Instantiate(_prefab);
+            obj.gameObject.SetActive(false);
+            _freeObjects.Enqueue(obj);
         }
     }
 
-    //public T GetObject()
-    //{
-    //    T newObject;
-
-    //    if (_pools.Count == 0)
-    //    {
-    //        newObject = GameObject.Instantiate(_prefab, Vector3.zero, Quaternion.identity);
-    //        return newObject;
-    //    }
-    //    else
-    //    {
-    //       newObject =  _pools.Dequeue();
-    //    }
-
-    //    newObject.gameObject.SetActive(true);
-    //    return newObject;
-    //}
     public T GetObject()
     {
-        if (_pools.Count == 0)
+        T obj;
+
+        if (_freeObjects.Count > 0)
         {
-            T obj = GameObject.Instantiate(_prefab);
-            obj.gameObject.SetActive(false);
-            _pools.Enqueue(obj);
+            obj = _freeObjects.Dequeue();
+        }
+        else
+        {
+            obj = Object.Instantiate(_prefab);
         }
 
-        T newObject = _pools.Dequeue();
-        newObject.gameObject.SetActive(true);
-        return newObject;
+        obj.gameObject.SetActive(true);
+        _usedObjects.Add(obj);
+        return obj;
     }
 
-    public void ReturnPoolObject(T returnObject)
+    public void ReturnPoolObject(T obj)
     {
-        _pools.Enqueue(returnObject);
-        returnObject.gameObject.SetActive(false);
+        if (_usedObjects.Remove(obj))
+        {
+            obj.gameObject.SetActive(false);
+            _freeObjects.Enqueue(obj);
+        }
+    }
+
+    public void ReturnAll()
+    {
+        foreach (var obj in _usedObjects)
+        {
+            if (obj != null)
+                obj.gameObject.SetActive(false);
+
+            _freeObjects.Enqueue(obj);
+        }
+
+        _usedObjects.Clear();
     }
 }

@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class SpawnerBase<T> : MonoBehaviour where T : MonoBehaviour
@@ -12,6 +11,9 @@ public abstract class SpawnerBase<T> : MonoBehaviour where T : MonoBehaviour
     [SerializeField] protected float MinSpawnDelay = 1f;
     [SerializeField] protected float MaxSpawnDelay = 5f;
 
+    protected Coroutine SpawnCoroutine;
+    protected WaitForSeconds WaitDelay;
+
     public event Action<T> Hit;
 
     private void Awake()
@@ -19,7 +21,27 @@ public abstract class SpawnerBase<T> : MonoBehaviour where T : MonoBehaviour
         PoolObject = new GenericObjectPool<T>(Prefab, PoolObjectCount);
     }
 
+    public virtual void StartSpawn()
+    {
+        StopSpawn();
+        SpawnCoroutine = StartCoroutine(SpawnRoutine());
+    }
+
+    public virtual void StopSpawn()
+    {
+        if (SpawnCoroutine != null)
+        {
+            StopCoroutine(SpawnCoroutine);
+            SpawnCoroutine = null;
+        }
+    }
+
+    protected abstract IEnumerator SpawnRoutine();
     protected abstract void GreateNewPoolObject(out T prefab);
     protected abstract void OnReturnPoolObject(T prefab);
-    protected abstract void Reset();    
+    protected virtual void ResetState()
+    {
+        StopSpawn();
+        PoolObject.ReturnAll();
+    }
 }

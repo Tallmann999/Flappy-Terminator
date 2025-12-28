@@ -1,14 +1,20 @@
+using System.Collections;
 using UnityEngine;
 
 public class BulletSpawner : SpawnerBase<Bullet>
 {
-    //[SerializeField] protected float MinSpawnDelay = 1f; Это для задердки между выстрелами регулировать
-    //[SerializeField] protected float MaxSpawnDelay = 5f;
-
-
     [SerializeField] private BulletOwner _owner;
+
     public int CurrentSpawnCount => SpawnObjectCount;
-   
+
+    public Bullet SpawnBullet(Vector3 position)
+    {
+        Bullet bullet;
+        GreateNewPoolObject(out bullet);
+        bullet.transform.position = position;
+        return bullet;
+    }
+
     protected override void GreateNewPoolObject(out Bullet bullet)
     {
         bullet = PoolObject.GetObject();
@@ -23,15 +29,13 @@ public class BulletSpawner : SpawnerBase<Bullet>
         PoolObject.ReturnPoolObject(bullet);
     }
 
-    public Bullet SpawnBullet(Vector3 position)
+    protected override void ResetState()
     {
-        Bullet bullet;
-        GreateNewPoolObject(out bullet);
-        bullet.transform.position = position;
-        return bullet;
+        base.ResetState();
     }
-    protected override void Reset()
+
+    protected override IEnumerator SpawnRoutine()
     {
-        // Реализовать остановку спавна
+        yield return null;
     }
 }

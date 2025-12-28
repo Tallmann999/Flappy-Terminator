@@ -1,6 +1,4 @@
-using UnityEngine;
-
-public interface IMoveble 
+public interface IMoveble
 {
-   void Move();
+    void Move();
 }

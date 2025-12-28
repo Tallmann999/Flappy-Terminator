@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour, ISpawnable<Enemy>, IInteractable, IDamageble
     [SerializeField] private int _scoreForKill = 10;
 
     private WaitForSeconds _waitForSeconds;
-    private Coroutine _coroutine;
+    private Coroutine _currentCoroutine;
 
     public event Action<Enemy> Died;
     public event Action<Enemy> Destroyer;
@@ -18,7 +18,19 @@ public class Enemy : MonoBehaviour, ISpawnable<Enemy>, IInteractable, IDamageble
 
     private void Start()
     {
-        StartCoroutine(LifecycleRoutine());
+        if (_currentCoroutine != null)
+        {
+            StopCoroutine(_currentCoroutine);
+        }
+
+        _currentCoroutine = StartCoroutine(LifecycleRoutine());
+    }
+
+    public void TakeDamage()
+    {
+        Destroy(this);
+        Died?.Invoke(this);
+        ReturnToPool();
     }
 
     private IEnumerator LifecycleRoutine()
@@ -38,11 +50,4 @@ public class Enemy : MonoBehaviour, ISpawnable<Enemy>, IInteractable, IDamageble
     {
         Destroyer?.Invoke(this);
     }
-
-    public void TakeDamage()
-    {
-        Destroy(this);
-        Died?.Invoke(this);
-        ReturnToPool();
-    }    
 }
