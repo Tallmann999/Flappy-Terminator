@@ -2,12 +2,12 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(InputReader))]
-[RequireComponent(typeof(PlayerMover), typeof(PlayerCollisionHandler))]
+[RequireComponent(typeof(PlayerMover), typeof(PlayerCollisionDetector))]
 public class Player : MonoBehaviour, IDamageble
 {
-    [SerializeField] private Weapon _currentWeapon;
+    [SerializeField] private PlayerWeapon _currentWeapon;
 
-    private PlayerCollisionHandler _playerCollisionHandler;
+    private PlayerCollisionDetector _playerCollisionHandler;
     private PlayerMover _playerMover;
     private InputReader _inputReader;
 
@@ -17,12 +17,12 @@ public class Player : MonoBehaviour, IDamageble
     {
         _inputReader.PressedMove += OnMovePressed;
         _inputReader.PressedAttack += OnAttackPressed;
-        _playerCollisionHandler.CollisionDetection += OnStopGame;
+       _playerCollisionHandler.CollisionDetection += OnStopGame;
     }
 
     private void Awake()
     {
-        _playerCollisionHandler = GetComponent<PlayerCollisionHandler>();
+        _playerCollisionHandler = GetComponent<PlayerCollisionDetector>();
         _inputReader = GetComponent<InputReader>();
         _playerMover = GetComponent<PlayerMover>();
     }
@@ -37,7 +37,7 @@ public class Player : MonoBehaviour, IDamageble
     public void OnStopGame(IInteractable interactable)
     {
         if (interactable is Ground || interactable is Enemy
-            || interactable is Meteorit || interactable is Bullet)
+            || interactable is Meteorit)
         {
             GameOver?.Invoke();
         }

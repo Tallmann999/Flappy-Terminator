@@ -3,19 +3,44 @@ using UnityEngine;
 
 public class EnemyWeapon : Weapon
 {
-    [SerializeField] private float _maxDelaySpawnBullet = 2f;
+    [SerializeField] private float _fireDelay = 2f;
+    [SerializeField] private int _shotsCount = 3;
 
-    private void Awake()
+    private Coroutine _fireCoroutine;
+
+    private void OnEnable()
     {
-        WaitForSeconds = new WaitForSeconds(_maxDelaySpawnBullet);
+        StartAttack();
     }
 
-    protected override IEnumerator FireActivator()
+    private void OnDisable()
     {
-        for (int i = 0; i < Spawner.CurrentSpawnCount; i++)
+        StopAttack();
+    }
+
+    public void StartAttack()
+    {
+        StopAttack();
+        _fireCoroutine = StartCoroutine(AttackRoutine());
+    }
+
+    public void StopAttack()
+    {
+        if (_fireCoroutine != null)
         {
-            yield return WaitForSeconds;
-            Spawner.SpawnBullet(FirePoint.position);
+            StopCoroutine(_fireCoroutine);
+            _fireCoroutine = null;
+        }
+    }
+
+    private IEnumerator AttackRoutine()
+    {
+        WaitForSeconds delay = new WaitForSeconds(_fireDelay);
+
+        for (int i = 0; i < _shotsCount; i++)
+        {
+            yield return delay;
+            Fire();
         }
     }
 }

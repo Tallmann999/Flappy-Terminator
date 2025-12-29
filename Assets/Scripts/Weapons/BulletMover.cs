@@ -5,7 +5,7 @@ public class BulletMover : MonoBehaviour, IMoveble
     [SerializeField] private float _speed;
     [SerializeField] private Vector2 _direction;
 
-    private void FixedUpdate()
+    private void Update()
     {
         Move();
     }

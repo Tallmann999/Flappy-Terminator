@@ -108,6 +108,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bullet
   _lifeTime: 2
+  _damageLayers:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &196203427098611070
 MonoBehaviour:
   m_ObjectHideFlags: 0

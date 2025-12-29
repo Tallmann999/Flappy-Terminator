@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6691684545211243500}
   - component: {fileID: 3886059553296925426}
   - component: {fileID: 4365916746229485028}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,6 +203,14 @@ PrefabInstance:
       propertyPath: FirePoint
       value: 
       objectReference: {fileID: 6503647001681858151}
+    - target: {fileID: 1274887402005361517, guid: fe8c919f3a3518a40b4128cfd1d59e57, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2974293063526039025, guid: fe8c919f3a3518a40b4128cfd1d59e57, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3069184747899111838, guid: fe8c919f3a3518a40b4128cfd1d59e57, type: 3}
       propertyPath: m_SortingOrder
       value: 0
@@ -210,6 +218,10 @@ PrefabInstance:
     - target: {fileID: 7430496720058954972, guid: fe8c919f3a3518a40b4128cfd1d59e57, type: 3}
       propertyPath: m_Name
       value: EnemyWeapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 7430496720058954972, guid: fe8c919f3a3518a40b4128cfd1d59e57, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8530925175725119365, guid: fe8c919f3a3518a40b4128cfd1d59e57, type: 3}
       propertyPath: PoolObjectCount

@@ -49,7 +49,6 @@ MonoBehaviour:
   SpawnObjectCount: 5
   MinSpawnDelay: 1
   MaxSpawnDelay: 2
-  _owner: 1
 --- !u!1 &2974293063526039025
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,5 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e3d45186d84d214ca090b35eaec44ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyWeapon
-  _spawner: {fileID: 8530925175725119365}
-  _firePoint: {fileID: 5620263400460845536}
+  Spawner: {fileID: 8530925175725119365}
+  FirePoint: {fileID: 5620263400460845536}
+  _fireDelay: 2
+  _shotsCount: 3

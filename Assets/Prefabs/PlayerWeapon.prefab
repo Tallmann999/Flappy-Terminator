@@ -44,12 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32ac1a1369062cb4c92feb6b0a63f3d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletSpawner
-  Prefab: {fileID: 0}
-  PoolObjectCount: 0
-  SpawnObjectCount: 0
+  Prefab: {fileID: 254701598834774600, guid: 5e5eba26fde82ae4bb271de9d406aa81, type: 3}
+  PoolObjectCount: 100
+  SpawnObjectCount: 5
   MinSpawnDelay: 1
   MaxSpawnDelay: 5
-  _owner: 0
 --- !u!1 &2394129843264310325
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,5 +231,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 213321faa07f77a41b85cbde938b82ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerWeapon
-  Spawner: {fileID: 0}
-  FirePoint: {fileID: 0}
+  Spawner: {fileID: 8530925175725119365}
+  FirePoint: {fileID: 5620263400460845536}

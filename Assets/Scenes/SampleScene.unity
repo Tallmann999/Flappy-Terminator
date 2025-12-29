@@ -819,7 +819,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
@@ -1756,7 +1756,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   Prefab: {fileID: 6691684545211243500, guid: 0d5716c2a6d2e234f8d71908fc6fe2be, type: 3}
   PoolObjectCount: 20
-  SpawnObjectCount: 50
+  SpawnObjectCount: 5
   MinSpawnDelay: 2
   MaxSpawnDelay: 5
   _minSpawnHeight: -3
@@ -2059,6 +2059,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4654592152306527927}
     m_Modifications:
+    - target: {fileID: 1274887402005361517, guid: 2e0a449d19904264f85839a6c15a7525, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2322233895583961978, guid: 2e0a449d19904264f85839a6c15a7525, type: 3}
       propertyPath: Spawner
       value: 
@@ -2075,6 +2079,10 @@ PrefabInstance:
       propertyPath: _firePoint
       value: 
       objectReference: {fileID: 1966522624}
+    - target: {fileID: 2974293063526039025, guid: 2e0a449d19904264f85839a6c15a7525, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3069184747899111838, guid: 2e0a449d19904264f85839a6c15a7525, type: 3}
       propertyPath: m_SortingOrder
       value: 0
@@ -2082,6 +2090,10 @@ PrefabInstance:
     - target: {fileID: 7430496720058954972, guid: 2e0a449d19904264f85839a6c15a7525, type: 3}
       propertyPath: m_Name
       value: PlayerWeapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 7430496720058954972, guid: 2e0a449d19904264f85839a6c15a7525, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8530925175725119365, guid: 2e0a449d19904264f85839a6c15a7525, type: 3}
       propertyPath: Prefab
@@ -2553,7 +2565,7 @@ GameObject:
   - component: {fileID: 1835556732139644257}
   - component: {fileID: 7909244517168851801}
   - component: {fileID: 7226883934926436318}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}

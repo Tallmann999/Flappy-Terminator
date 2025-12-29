@@ -8,6 +8,7 @@ public class EnemySpawner : SpawnerBase<Enemy>
     [SerializeField] private ScoreCounter _scoreCounter;
 
     private WaitForSeconds _waitForSeconds;
+    private Coroutine _spawnCoroutine;
 
     public void Reset()
     {
@@ -15,25 +16,44 @@ public class EnemySpawner : SpawnerBase<Enemy>
         _scoreCounter.Reset();
     }
 
-    protected override IEnumerator SpawnRoutine()
+    public void StartSpawn()
+    {
+        StopSpawn();
+        _spawnCoroutine = StartCoroutine(SpawnRoutine());
+    }
+
+    private void StopSpawn()
+    {
+        if (_spawnCoroutine != null)
+        {
+            StopCoroutine(_spawnCoroutine);
+            _spawnCoroutine = null;
+        }
+
+        ResetState();
+    }
+
+    private IEnumerator SpawnRoutine()
     {
         _waitForSeconds = new WaitForSeconds((Random.Range(MinSpawnDelay, MaxSpawnDelay)));
 
         for (int i = 0; i < SpawnObjectCount; i++)
         {
-            GreateNewPoolObject(out Prefab);
+            Enemy enemy = GreateNewPoolObject();
             yield return _waitForSeconds;
         }
     }
 
-    protected override void GreateNewPoolObject(out Enemy enemy)
+    protected override Enemy GreateNewPoolObject()
     {
+        Enemy enemy;
         enemy = PoolObject.GetObject();
         enemy.Destroyer -= OnReturnPoolObject;
         enemy.Destroyer += OnReturnPoolObject;
         enemy.Died -= OnEnemyDied;
         enemy.Died += OnEnemyDied;
         enemy.transform.position = GenerateRandomPosition();
+        return enemy;
     }
 
     protected override void OnReturnPoolObject(Enemy enemy)

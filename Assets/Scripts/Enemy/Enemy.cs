@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour, ISpawnable<Enemy>, IInteractable, IDamageble
 {
     [SerializeField] private float _lifeTime = 5f;
-    [SerializeField] private Weapon _currentWeapon;
+    [SerializeField] private EnemyWeapon _currentWeapon;
     [SerializeField] private int _scoreForKill = 10;
 
     private WaitForSeconds _waitForSeconds;
@@ -28,7 +28,6 @@ public class Enemy : MonoBehaviour, ISpawnable<Enemy>, IInteractable, IDamageble
 
     public void TakeDamage()
     {
-        Destroy(this);
         Died?.Invoke(this);
         ReturnToPool();
     }
@@ -36,14 +35,8 @@ public class Enemy : MonoBehaviour, ISpawnable<Enemy>, IInteractable, IDamageble
     private IEnumerator LifecycleRoutine()
     {
         _waitForSeconds = new WaitForSeconds(_lifeTime);
-        Shooting();
         yield return _waitForSeconds;
         ReturnToPool();
-    }
-
-    private void Shooting()
-    {
-        _currentWeapon.Shoot();
     }
 
     private void ReturnToPool()
