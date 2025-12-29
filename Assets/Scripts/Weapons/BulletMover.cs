@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BulletMover : MonoBehaviour, IMoveble
+public class BulletMover : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private Vector2 _direction;
@@ -10,7 +10,7 @@ public class BulletMover : MonoBehaviour, IMoveble
         Move();
     }
 
-    public void Move()
+    private void Move()
     {
         transform.Translate(_direction * Time.deltaTime * _speed);
     }

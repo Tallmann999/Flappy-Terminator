@@ -39,12 +39,12 @@ public class EnemySpawner : SpawnerBase<Enemy>
 
         for (int i = 0; i < SpawnObjectCount; i++)
         {
-            Enemy enemy = GreateNewPoolObject();
+            CreateNewPoolObject();
             yield return _waitForSeconds;
         }
     }
 
-    protected override Enemy GreateNewPoolObject()
+    protected override Enemy CreateNewPoolObject()
     {
         Enemy enemy;
         enemy = PoolObject.GetObject();
@@ -61,11 +61,6 @@ public class EnemySpawner : SpawnerBase<Enemy>
         enemy.Died -= OnEnemyDied;
         enemy.Destroyer -= OnReturnPoolObject;
         PoolObject.ReturnPoolObject(enemy);
-    }
-
-    protected override void ResetState()
-    {
-        base.ResetState();
     }
 
     private void OnEnemyDied(Enemy enemy)

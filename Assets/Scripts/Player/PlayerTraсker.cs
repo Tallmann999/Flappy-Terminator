@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class PlayerTraker : MonoBehaviour
+public class PlayerTrañker : MonoBehaviour
 {
     [SerializeField] private Player _player;
     [SerializeField] private float _xOffset;
 
-    private void Update()
+    private void LateUpdate()
     {
         var position = transform.position;
         position.x = _player.transform.position.x + _xOffset;

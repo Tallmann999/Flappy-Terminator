@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour, ISpawnable<Bullet>, IInteractable
+public class Bullet : MonoBehaviour, IInteractable
 {
     [SerializeField] private float _lifeTime = 5f;
     [SerializeField] private LayerMask _damageLayers;
@@ -16,17 +16,17 @@ public class Bullet : MonoBehaviour, ISpawnable<Bullet>, IInteractable
     {
         if (_coroutine != null)
         {
-            StopCoroutine(LifecycleRoutine());
+            StopCoroutine(RunLifetime());
         }
 
-        _coroutine = StartCoroutine(LifecycleRoutine());
+        _coroutine = StartCoroutine(RunLifetime());
     }
 
     private void OnDisable()
     {
         if (_coroutine != null)
         {
-            StopCoroutine(LifecycleRoutine());
+            StopCoroutine(RunLifetime());
         }
     }
 
@@ -35,14 +35,14 @@ public class Bullet : MonoBehaviour, ISpawnable<Bullet>, IInteractable
         if ((_damageLayers.value & (1 << collision.gameObject.layer)) == 0)
             return;
 
-        if (collision.TryGetComponent(out IDamageble damageable))
+        if (collision.TryGetComponent(out IDamageable damageable))
         {
             damageable.TakeDamage();
             ReturnToPool();
         }
     }
 
-    private IEnumerator LifecycleRoutine()
+    private IEnumerator RunLifetime()
     {
         _waitForSeconds = new WaitForSeconds(_lifeTime);
         yield return _waitForSeconds;

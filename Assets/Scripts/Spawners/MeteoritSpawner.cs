@@ -34,12 +34,12 @@ public class MeteoritSpawner : SpawnerBase<Meteorit>
 
         for (int i = 0; i < SpawnObjectCount; i++)
         {
-            Meteorit meteorit = GreateNewPoolObject();
+           CreateNewPoolObject();
             yield return _waitForSeconds;
         }
     }
 
-    protected override Meteorit GreateNewPoolObject()
+    protected override Meteorit CreateNewPoolObject()
     {
         Meteorit meteorit;
         meteorit = PoolObject.GetObject();
@@ -53,10 +53,5 @@ public class MeteoritSpawner : SpawnerBase<Meteorit>
     {
         meteorit.Destroyer -= OnReturnPoolObject;
         PoolObject.ReturnPoolObject(meteorit);
-    }
-
-    protected override void ResetState()
-    {
-        base.ResetState();
     }
 }

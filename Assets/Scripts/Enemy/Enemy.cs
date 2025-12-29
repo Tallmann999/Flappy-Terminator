@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, ISpawnable<Enemy>, IInteractable, IDamageble
+public class Enemy : MonoBehaviour, IInteractable, IDamageable
 {
     [SerializeField] private float _lifeTime = 5f;
     [SerializeField] private EnemyWeapon _currentWeapon;
@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour, ISpawnable<Enemy>, IInteractable, IDamageble
             StopCoroutine(_currentCoroutine);
         }
 
-        _currentCoroutine = StartCoroutine(LifecycleRoutine());
+        _currentCoroutine = StartCoroutine(RunLifetime());
     }
 
     public void TakeDamage()
@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour, ISpawnable<Enemy>, IInteractable, IDamageble
         ReturnToPool();
     }
 
-    private IEnumerator LifecycleRoutine()
+    private IEnumerator RunLifetime()
     {
         _waitForSeconds = new WaitForSeconds(_lifeTime);
         yield return _waitForSeconds;

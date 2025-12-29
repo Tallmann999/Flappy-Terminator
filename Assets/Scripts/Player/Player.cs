@@ -3,7 +3,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(InputReader))]
 [RequireComponent(typeof(PlayerMover), typeof(PlayerCollisionDetector))]
-public class Player : MonoBehaviour, IDamageble
+public class Player : MonoBehaviour, IDamageable
 {
     [SerializeField] private PlayerWeapon _currentWeapon;
 
@@ -54,9 +54,9 @@ public class Player : MonoBehaviour, IDamageble
         _playerMover.Reset();
     }
 
-    private void OnAttackPressed(bool attackStatus)
+    private void OnAttackPressed(bool canAttack)
     {
-        if (attackStatus)
+        if (canAttack)
         {
             _currentWeapon.Shoot();
         }

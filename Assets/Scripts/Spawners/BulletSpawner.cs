@@ -4,13 +4,13 @@ public class BulletSpawner : SpawnerBase<Bullet>
 {
     public Bullet SpawnBullet(Vector3 position)
     {
-        Bullet bullet = GreateNewPoolObject();
+        Bullet bullet = CreateNewPoolObject();
 
         bullet.transform.position = position;
         return bullet;
     }
 
-    protected override Bullet GreateNewPoolObject()
+    protected override Bullet CreateNewPoolObject()
     {
         Bullet bullet;
         bullet = PoolObject.GetObject();
@@ -23,10 +23,5 @@ public class BulletSpawner : SpawnerBase<Bullet>
     {
         bullet.Destroyer -= OnReturnPoolObject;
         PoolObject.ReturnPoolObject(bullet);
-    }
-
-    protected override void ResetState()
-    {
-        base.ResetState();
     }
 }

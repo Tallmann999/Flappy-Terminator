@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GenericObjectPool<T> where T : MonoBehaviour
+public class ObjectPool<T> where T : MonoBehaviour
 {
-    private T _prefab;
     private readonly Queue<T> _freeObjects = new();
     private readonly HashSet<T> _usedObjects = new();
+    private T _prefab;
 
-    public GenericObjectPool(T prefab, int initializeCount)
+    public ObjectPool(T prefab, int initializeCount)
     {
         _prefab = prefab;
 

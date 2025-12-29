@@ -5,7 +5,7 @@ public class ScoreCounter : MonoBehaviour
 {
     private int _scope;
 
-    public Action<int> ScopeChanger;
+    public event Action<int> ScopeChanger;
 
     public void Add(int value)
     {

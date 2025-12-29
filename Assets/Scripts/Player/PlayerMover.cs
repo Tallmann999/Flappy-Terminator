@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerMover : MonoBehaviour, IMoveble
+public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private float _speed;
 

@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class Meteorit : MonoBehaviour, ISpawnable<Meteorit>, IInteractable
+public class Meteorit : MonoBehaviour, IInteractable
 {
     [SerializeField] private float _lifeTime = 2f;
 
@@ -15,21 +15,21 @@ public class Meteorit : MonoBehaviour, ISpawnable<Meteorit>, IInteractable
     {
         if (_currentCoroutine != null)
         {
-            StopCoroutine(LifecycleRoutine());
+            StopCoroutine(RunLifetime());
         }
 
-        _currentCoroutine = StartCoroutine(LifecycleRoutine());
+        _currentCoroutine = StartCoroutine(RunLifetime());
     }
 
     private void OnDisable()
     {
         if (_currentCoroutine != null)
         {
-            StopCoroutine(LifecycleRoutine());
+            StopCoroutine(RunLifetime());
         }
     }
 
-    private IEnumerator LifecycleRoutine()
+    private IEnumerator RunLifetime()
     {
         _waitForSeconds = new WaitForSeconds(_lifeTime);
         yield return _waitForSeconds;

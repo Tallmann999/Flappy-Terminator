@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyMover : MonoBehaviour, IMoveble
+public class EnemyMover : MonoBehaviour 
 {
     [SerializeField] private float _speed;
 
@@ -9,7 +9,7 @@ public class EnemyMover : MonoBehaviour, IMoveble
         Move();
     }
 
-    public void Move()
+    private void Move()
     {
         transform.Translate(Vector2.left * Time.deltaTime * _speed);
     }
