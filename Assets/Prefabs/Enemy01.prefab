@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6691684545211243500}
   - component: {fileID: 3886059553296925426}
   - component: {fileID: 4365916746229485028}
+  - component: {fileID: 3292022138418197830}
   m_Layer: 7
   m_Name: Enemy01
   m_TagString: Untagged
@@ -145,7 +146,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   _lifeTime: 12
-  _currentWeapon: {fileID: 6812718673811126584}
   _scoreForKill: 10
 --- !u!114 &3886059553296925426
 MonoBehaviour:
@@ -187,6 +187,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &3292022138418197830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5499398742554836991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daec73dc2eae80a42bcf0b930eb8f2da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAttacker
+  _weapon: {fileID: 694018466774883014}
+  _fireDelay: 2
+  _shotsCount: 3
 --- !u!1001 &1711006894171164551
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -207,6 +222,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 2170472967878513985, guid: fe8c919f3a3518a40b4128cfd1d59e57, type: 3}
+      propertyPath: _spawner
+      value: 
+      objectReference: {fileID: 7051889949177108482}
+    - target: {fileID: 2170472967878513985, guid: fe8c919f3a3518a40b4128cfd1d59e57, type: 3}
+      propertyPath: _firePoint
+      value: 
+      objectReference: {fileID: 6503647001681858151}
     - target: {fileID: 2974293063526039025, guid: fe8c919f3a3518a40b4128cfd1d59e57, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -225,11 +248,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8530925175725119365, guid: fe8c919f3a3518a40b4128cfd1d59e57, type: 3}
       propertyPath: PoolObjectCount
-      value: 20
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8530925175725119365, guid: fe8c919f3a3518a40b4128cfd1d59e57, type: 3}
       propertyPath: SpawnObjectCount
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 9068029259862694074, guid: fe8c919f3a3518a40b4128cfd1d59e57, type: 3}
       propertyPath: m_LocalPosition.x
@@ -276,22 +299,22 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe8c919f3a3518a40b4128cfd1d59e57, type: 3}
---- !u!4 &6503647001681858151 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5620263400460845536, guid: fe8c919f3a3518a40b4128cfd1d59e57, type: 3}
-  m_PrefabInstance: {fileID: 1711006894171164551}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6812718673811126584 stripped
+--- !u!114 &694018466774883014 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -3948227243200760129, guid: fe8c919f3a3518a40b4128cfd1d59e57, type: 3}
+  m_CorrespondingSourceObject: {fileID: 2170472967878513985, guid: fe8c919f3a3518a40b4128cfd1d59e57, type: 3}
   m_PrefabInstance: {fileID: 1711006894171164551}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e3d45186d84d214ca090b35eaec44ba, type: 3}
+  m_Script: {fileID: 11500000, guid: f797b886f9b2ba940a61d072f831c4bf, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyWeapon
+  m_EditorClassIdentifier: Assembly-CSharp::Weapon
+--- !u!4 &6503647001681858151 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5620263400460845536, guid: fe8c919f3a3518a40b4128cfd1d59e57, type: 3}
+  m_PrefabInstance: {fileID: 1711006894171164551}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7051889949177108482 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8530925175725119365, guid: fe8c919f3a3518a40b4128cfd1d59e57, type: 3}

@@ -1,51 +1,51 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(InputReader))]
+[RequireComponent(typeof(InputReader), typeof(PlayerAttacker))]
 [RequireComponent(typeof(PlayerMover), typeof(PlayerCollisionDetector))]
 public class Player : MonoBehaviour, IDamageable
 {
-    [SerializeField] private PlayerWeapon _currentWeapon;
-
     private PlayerCollisionDetector _playerCollisionHandler;
     private PlayerMover _playerMover;
+    private PlayerAttacker _playerAttacker;
     private InputReader _inputReader;
 
-    public event Action GameOver;
-
-    private void OnEnable()
-    {
-        _inputReader.PressedMove += OnMovePressed;
-        _inputReader.PressedAttack += OnAttackPressed;
-       _playerCollisionHandler.CollisionDetection += OnStopGame;
-    }
+    public event Action Died;
 
     private void Awake()
     {
         _playerCollisionHandler = GetComponent<PlayerCollisionDetector>();
         _inputReader = GetComponent<InputReader>();
         _playerMover = GetComponent<PlayerMover>();
+        _playerAttacker = GetComponent<PlayerAttacker>();
     }
 
+    private void OnEnable()
+    {
+        _inputReader.MoveInput += OnMovePressed;
+        _inputReader.AttackInput += OnAttackPressed;
+        _playerCollisionHandler.CollisionDetection += OnDeadlyInteraction;
+    }
     private void OnDisable()
     {
-        _inputReader.PressedMove -= OnMovePressed;
-        _inputReader.PressedAttack -= OnAttackPressed;
-        _playerCollisionHandler.CollisionDetection -= OnStopGame;
+        _inputReader.MoveInput -= OnMovePressed;
+        _inputReader.AttackInput -= OnAttackPressed;
+        _playerCollisionHandler.CollisionDetection -= OnDeadlyInteraction;
     }
 
-    public void OnStopGame(IInteractable interactable)
+    public void OnDeadlyInteraction(IInteractable interactable)
     {
         if (interactable is Ground || interactable is Enemy
             || interactable is Meteorit)
         {
-            GameOver?.Invoke();
+            Died?.Invoke();
         }
     }
 
     public void TakeDamage()
     {
-        GameOver?.Invoke();
+        Died?.Invoke();
+        _playerAttacker.Reset();
         Time.timeScale = 0;
     }
 
@@ -58,7 +58,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         if (canAttack)
         {
-            _currentWeapon.Shoot();
+            _playerAttacker.Attack();
         }
     }
 

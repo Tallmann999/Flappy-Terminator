@@ -220,7 +220,6 @@ GameObject:
   m_Component:
   - component: {fileID: 217268496}
   - component: {fileID: 217268498}
-  - component: {fileID: 217268497}
   m_Layer: 5
   m_Name: ScopeView
   m_TagString: Untagged
@@ -251,18 +250,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &217268497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 217268495}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5819d0b26f788a5428604047bf58b35e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ScoreCounter
 --- !u!114 &217268498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,7 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c418ead32f40a94194cc780723689e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreView
-  _scoreCounter: {fileID: 217268497}
+  _scoreCounter: {fileID: 519420036}
   _scope: {fileID: 862541406}
 --- !u!1 &238672112
 GameObject:
@@ -653,6 +640,7 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420036}
   - component: {fileID: 519420034}
   - component: {fileID: 519420035}
   m_Layer: 0
@@ -812,6 +800,7 @@ MonoBehaviour:
   _mainLevelMusic: {fileID: 519420035}
   _startScreen: {fileID: 936186758}
   _gameOverScreen: {fileID: 1301291730}
+  _scoreCounter: {fileID: 519420036}
 --- !u!82 &519420035
 AudioSource:
   m_ObjectHideFlags: 0
@@ -819,7 +808,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
@@ -909,6 +898,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &519420036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5819d0b26f788a5428604047bf58b35e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScoreCounter
 --- !u!1 &541893137
 GameObject:
   m_ObjectHideFlags: 0
@@ -1735,6 +1736,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1182177159}
   - component: {fileID: 1182177158}
+  - component: {fileID: 1182177160}
   m_Layer: 0
   m_Name: EnemySpawner
   m_TagString: Untagged
@@ -1761,7 +1763,6 @@ MonoBehaviour:
   MaxSpawnDelay: 5
   _minSpawnHeight: -3
   _maxSpawnHeight: 3
-  _scoreCounter: {fileID: 217268497}
 --- !u!4 &1182177159
 Transform:
   m_ObjectHideFlags: 0
@@ -1777,6 +1778,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1182177160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1182177157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5819d0b26f788a5428604047bf58b35e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScoreCounter
 --- !u!1 &1215803082
 GameObject:
   m_ObjectHideFlags: 0
@@ -2087,6 +2100,22 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4040710820759669389, guid: 2e0a449d19904264f85839a6c15a7525, type: 3}
+      propertyPath: Spawner
+      value: 
+      objectReference: {fileID: 1534133447}
+    - target: {fileID: 4040710820759669389, guid: 2e0a449d19904264f85839a6c15a7525, type: 3}
+      propertyPath: _spawner
+      value: 
+      objectReference: {fileID: 1534133447}
+    - target: {fileID: 4040710820759669389, guid: 2e0a449d19904264f85839a6c15a7525, type: 3}
+      propertyPath: FirePoint
+      value: 
+      objectReference: {fileID: 1966522624}
+    - target: {fileID: 4040710820759669389, guid: 2e0a449d19904264f85839a6c15a7525, type: 3}
+      propertyPath: _firePoint
+      value: 
+      objectReference: {fileID: 1966522624}
     - target: {fileID: 7430496720058954972, guid: 2e0a449d19904264f85839a6c15a7525, type: 3}
       propertyPath: m_Name
       value: PlayerWeapon
@@ -2169,17 +2198,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32ac1a1369062cb4c92feb6b0a63f3d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletSpawner
---- !u!114 &1534133448 stripped
+--- !u!114 &1534133450 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2322233895583961978, guid: 2e0a449d19904264f85839a6c15a7525, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4040710820759669389, guid: 2e0a449d19904264f85839a6c15a7525, type: 3}
   m_PrefabInstance: {fileID: 1534133445}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 213321faa07f77a41b85cbde938b82ee, type: 3}
+  m_Script: {fileID: 11500000, guid: f797b886f9b2ba940a61d072f831c4bf, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerWeapon
+  m_EditorClassIdentifier: Assembly-CSharp::Weapon
 --- !u!1 &1535342190
 GameObject:
   m_ObjectHideFlags: 0
@@ -2449,7 +2478,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88dc270389a1b1e49a81c4d1eaf1f0da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  _currentWeapon: {fileID: 1534133448}
 --- !u!50 &416487786854888793
 Rigidbody2D:
   serializedVersion: 5
@@ -2549,6 +2577,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMover
   _speed: 5
+  _rotaionSpeed: 1
+  _minRotationZ: -45
+  _maxRotationZ: 45
 --- !u!1 &2427887544618892862
 GameObject:
   m_ObjectHideFlags: 0
@@ -2565,6 +2596,7 @@ GameObject:
   - component: {fileID: 1835556732139644257}
   - component: {fileID: 7909244517168851801}
   - component: {fileID: 7226883934926436318}
+  - component: {fileID: 7909244517168851802}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -2636,6 +2668,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68f3eec38e8472e44999c34d089b68c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InputReader
+  _moveKey: 32
+  _attackKey: 323
 --- !u!114 &7909244517168851801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2648,6 +2682,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc0dc7e8aea4fc6489bcaa71ca05bf25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCollisionHandler
+--- !u!114 &7909244517168851802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2427887544618892862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bea14a7f345fef147b21cf84ddeb2b8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAttacker
+  _weapon: {fileID: 1534133450}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

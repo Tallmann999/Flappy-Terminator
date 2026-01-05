@@ -90,7 +90,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9068029259862694074}
   - component: {fileID: 3069184747899111838}
-  - component: {fileID: -3948227243200760129}
+  - component: {fileID: 2170472967878513985}
   m_Layer: 0
   m_Name: EnemyWeapon
   m_TagString: Untagged
@@ -174,7 +174,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &-3948227243200760129
+--- !u!114 &2170472967878513985
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -183,10 +183,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 7430496720058954972}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e3d45186d84d214ca090b35eaec44ba, type: 3}
+  m_Script: {fileID: 11500000, guid: f797b886f9b2ba940a61d072f831c4bf, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyWeapon
+  m_EditorClassIdentifier: Assembly-CSharp::Weapon
   Spawner: {fileID: 8530925175725119365}
   FirePoint: {fileID: 5620263400460845536}
-  _fireDelay: 2
-  _shotsCount: 3

@@ -1,7 +1,20 @@
 using UnityEngine;
 
 public class BulletSpawner : SpawnerBase<Bullet>
-{
+{  
+    protected override Bullet CreateNewPoolObject()
+    {
+        Bullet bullet = PoolObject.GetObject();
+        bullet.Destroyer += OnPoolObjectRequestedReturn;
+        return bullet;
+    }
+
+    protected override void OnPoolObjectRequestedReturn(PoolableObject bullet)
+    {
+        bullet.Destroyer -= OnPoolObjectRequestedReturn;
+        PoolObject.ReturnPoolObject((Bullet)bullet);
+    }
+
     public Bullet SpawnBullet(Vector3 position)
     {
         Bullet bullet = CreateNewPoolObject();
@@ -10,18 +23,8 @@ public class BulletSpawner : SpawnerBase<Bullet>
         return bullet;
     }
 
-    protected override Bullet CreateNewPoolObject()
+    public void ResetSpawner()
     {
-        Bullet bullet;
-        bullet = PoolObject.GetObject();
-        bullet.Destroyer -= OnReturnPoolObject;
-        bullet.Destroyer += OnReturnPoolObject;
-        return bullet;
-    }
-
-    protected override void OnReturnPoolObject(Bullet bullet)
-    {
-        bullet.Destroyer -= OnReturnPoolObject;
-        PoolObject.ReturnPoolObject(bullet);
+        ResetState();
     }
 }

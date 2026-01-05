@@ -32,26 +32,24 @@ public class MeteoritSpawner : SpawnerBase<Meteorit>
     {
         _waitForSeconds = new WaitForSeconds((Random.Range(MinSpawnDelay, MaxSpawnDelay)));
 
-        for (int i = 0; i < SpawnObjectCount; i++)
+        while (enabled)
         {
-           CreateNewPoolObject();
+            CreateNewPoolObject();
             yield return _waitForSeconds;
         }
     }
 
     protected override Meteorit CreateNewPoolObject()
     {
-        Meteorit meteorit;
-        meteorit = PoolObject.GetObject();
-        meteorit.Destroyer -= OnReturnPoolObject;
-        meteorit.Destroyer += OnReturnPoolObject;
+        Meteorit meteorit = PoolObject.GetObject();
+        meteorit.Destroyer += OnPoolObjectRequestedReturn;
         meteorit.transform.position = transform.position;
         return meteorit;
     }
 
-    protected override void OnReturnPoolObject(Meteorit meteorit)
+    protected override void OnPoolObjectRequestedReturn(PoolableObject meteorit)
     {
-        meteorit.Destroyer -= OnReturnPoolObject;
-        PoolObject.ReturnPoolObject(meteorit);
+        meteorit.Destroyer -= OnPoolObjectRequestedReturn;
+        PoolObject.ReturnPoolObject((Meteorit)meteorit);
     }
 }

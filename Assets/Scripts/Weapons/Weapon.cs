@@ -1,13 +1,19 @@
-using System.Collections;
 using UnityEngine;
 
-public abstract class Weapon : MonoBehaviour
+public class Weapon : MonoBehaviour
 {
-    [SerializeField] protected BulletSpawner Spawner;
-    [SerializeField] protected Transform FirePoint;
+    [SerializeField] private BulletSpawner _spawner;
+    [SerializeField] private Transform _firePoint;
 
-    protected void Fire()
+    public void Fire()
     {
-        Spawner.SpawnBullet(FirePoint.position);
+        Bullet bullet = _spawner.SpawnBullet(_firePoint.position);
+        BulletMover mover = bullet.GetComponent<BulletMover>();
+        mover.SetDirection(_firePoint.right);
+    }
+
+    public void Reset()
+    {
+        _spawner.ResetSpawner();
     }
 }

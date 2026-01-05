@@ -8,18 +8,19 @@ public class Game : MonoBehaviour
     [SerializeField] private AudioSource _mainLevelMusic;
     [SerializeField] private StartScreenGame _startScreen;
     [SerializeField] private EndScreenGame _gameOverScreen;
-
-    private void OnEnable()
-    {
-        _player.GameOver += OnGameOver;
-        _startScreen.PlayButtonClicked += OnPlayButtonClick;
-        _gameOverScreen.RestartButtonClicked += OnRestartButtonClick;
-    }
+    [SerializeField] private ScoreCounter _scoreCounter;
 
     private void Awake()
     {
-        _mainLevelMusic = GetComponent<AudioSource>();
         _mainLevelMusic.Stop();
+    }
+
+    private void OnEnable()
+    {
+        _player.Died += OnGameOver;
+        _startScreen.PlayButtonClicked += OnPlayButtonClick;
+        _gameOverScreen.RestartButtonClicked += OnRestartButtonClick;
+        _enemySpawner.EnemyDespawned += OnEnemyDespawned;
     }
 
     private void Start()
@@ -31,9 +32,15 @@ public class Game : MonoBehaviour
 
     private void OnDisable()
     {
-        _player.GameOver -= OnGameOver;
+        _player.Died -= OnGameOver;
         _startScreen.PlayButtonClicked -= OnPlayButtonClick;
         _gameOverScreen.RestartButtonClicked -= OnRestartButtonClick;
+        _enemySpawner.EnemyDespawned -= OnEnemyDespawned;
+    }
+
+    private void OnEnemyDespawned(Enemy enemy)
+    {
+        _scoreCounter.Add(enemy.ScoreForKill);
     }
 
     private void OnGameOver()
@@ -65,6 +72,7 @@ public class Game : MonoBehaviour
         _player.Reset();
         _enemySpawner.Reset();
         _meteoritSpawner.Reset();
+        _scoreCounter.Reset();
 
         _enemySpawner.StartSpawn();
         _meteoritSpawner.StartSpawn();

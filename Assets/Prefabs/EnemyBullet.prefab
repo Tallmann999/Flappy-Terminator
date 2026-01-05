@@ -107,8 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5824470992c6c8841936134747ef639c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletMover
-  _speed: 1
-  _direction: {x: -5, y: 0}
+  _speed: 10
 --- !u!61 &2105056264451811069
 BoxCollider2D:
   m_ObjectHideFlags: 0

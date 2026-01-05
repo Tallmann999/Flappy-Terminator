@@ -134,7 +134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9068029259862694074}
   - component: {fileID: 3069184747899111838}
-  - component: {fileID: 2322233895583961978}
+  - component: {fileID: 4040710820759669389}
   m_Layer: 0
   m_Name: PlayerWeapon
   m_TagString: Untagged
@@ -219,7 +219,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &2322233895583961978
+--- !u!114 &4040710820759669389
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -228,8 +228,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 7430496720058954972}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 213321faa07f77a41b85cbde938b82ee, type: 3}
+  m_Script: {fileID: 11500000, guid: f797b886f9b2ba940a61d072f831c4bf, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerWeapon
-  Spawner: {fileID: 8530925175725119365}
-  FirePoint: {fileID: 5620263400460845536}
+  m_EditorClassIdentifier: Assembly-CSharp::Weapon
+  Spawner: {fileID: 0}
+  FirePoint: {fileID: 0}

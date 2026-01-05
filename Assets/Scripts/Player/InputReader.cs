@@ -3,26 +3,27 @@ using UnityEngine;
 
 public class InputReader : MonoBehaviour
 {
-    private const KeyCode Move = KeyCode.Space;
+    [SerializeField] private KeyCode _moveKey = KeyCode.Space;
+    [SerializeField] private KeyCode _attackKey = KeyCode.Mouse0;
 
     private bool _isMove;
     private bool _isAttack;
 
-    public event Action<bool> PressedMove;
-    public event Action<bool> PressedAttack;
+    public event Action<bool> MoveInput;
+    public event Action<bool> AttackInput;
 
     private void FixedUpdate()
     {
-        if (Input.GetKey(Move))
+        if (Input.GetKey(_moveKey))
         {
             _isMove = true;
-            PressedMove?.Invoke(_isMove);
+            MoveInput?.Invoke(_isMove);
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(_attackKey))
         {
             _isAttack = true;
-            PressedAttack?.Invoke(_isAttack);
+            AttackInput?.Invoke(_isAttack);
         }
     }
 }

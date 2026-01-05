@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class SpawnerBase<T> : MonoBehaviour where T : MonoBehaviour
+public abstract class SpawnerBase<T> : MonoBehaviour where T : PoolableObject
 {
     [SerializeField] protected T Prefab;
     [SerializeField] protected ObjectPool<T> PoolObject;
@@ -15,7 +15,7 @@ public abstract class SpawnerBase<T> : MonoBehaviour where T : MonoBehaviour
     } 
 
     protected abstract T CreateNewPoolObject();
-    protected abstract void OnReturnPoolObject(T prefab);
+    protected abstract void OnPoolObjectRequestedReturn(PoolableObject prefab);
     protected virtual void ResetState()
     {
         PoolObject.ReturnAll();
