@@ -29,3 +29,7 @@ This is a Unity 6 C# game project.
 ## Git rules
 - Before big changes, recommend creating a new branch.
 - Do not commit automatically unless asked.
+
+## Local agent skills
+- Local Codex skill installed: `C:\Users\User\.codex\skills\gd-doc-kickoff`
+- This is the cloned `gd-doc-kickoff` repository with `SKILL.md` and agent profile files.
