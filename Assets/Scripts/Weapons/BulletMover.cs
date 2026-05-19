@@ -4,6 +4,7 @@ public class BulletMover : MonoBehaviour
 {
     [SerializeField] private float _speed;
 
+    private float _speedMultiplier = 1f;
     private Vector2 _direction;
 
     private void Update()
@@ -18,8 +19,13 @@ public class BulletMover : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, 0f, angle);
     }
 
+    public void SetSpeedMultiplier(float speedMultiplier)
+    {
+        _speedMultiplier = Mathf.Max(0f, speedMultiplier);
+    }
+
     private void Move()
     {
-        transform.Translate(_direction * Time.deltaTime * _speed, Space.World);
+        transform.Translate(_direction * Time.deltaTime * _speed * _speedMultiplier, Space.World);
     }
 }
